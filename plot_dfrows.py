@@ -17,7 +17,7 @@ class DataframeRowPlotter:
         self.df = tempDf[cols]
         self.df.reset_index()
         self.cols = cols
-        print("self.df=\n{}".format(self.df.head()))
+        print("self.df=\n{}".format(self.df))
         self.nXPoints = 10
         self.xpoints = [x for x in range(0, self.nXPoints)]
 
@@ -27,6 +27,11 @@ class DataframeRowPlotter:
         # fig.subplots_adjust(hspace=1.5)
 
         for ix, row in self.df.iterrows():
+            # print(f"ix={ix}, type={type(ix)}")
+            # print(f"row={row}")
+            if ix == 'merged': 
+                break
+            ix = int(ix)
             ar = row.to_numpy()
             ypoints = ar[1 : -1]  # excluding distance, autocorr
             axs[ix].plot(self.xpoints, ypoints)
