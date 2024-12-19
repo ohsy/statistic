@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+
 //  #define TEST
 
 /*
@@ -54,9 +55,13 @@ void test_set_autocorrelations() {
 }
 
 
-int main() {
-    int nTimesteps = 10;
-    int nLevels_perTimestep = 5;
+int main(int argc, char *argv[]) {
+    if (argc != 3) {
+        printf("usage: get_max_autocc nTimesteps nLevles_perTimestep\n");
+        exit(0);
+    }
+    int nTimesteps = atoi(argv[1]);  // 10;
+    int nLevels_perTimestep = atoi(argv[2]);  // 5;
     int max_distance = nTimesteps - 2;  // for distance 0 and (nTimesteps-1)
 
     int levels[nLevels_perTimestep];
@@ -147,7 +152,7 @@ int main() {
     nChars += sprintf(buffer + nChars, "%.2lf\n", max_merged_autocorr);
 
 
-    FILE *fp = fopen("ac.csv", "wt");
+    FILE *fp = fopen("out.csv", "wt");
     fprintf(fp, "%s", buffer);
     printf("%s", buffer);
 }

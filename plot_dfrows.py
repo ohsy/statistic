@@ -13,11 +13,13 @@ class DataframeRowPlotter:
     """
 
     def __init__(self, infilepath, cols):
-        tempDf = pd.read_csv(infilepath, sep='\t', usecols=cols)
+        # tempDf = pd.read_csv(infilepath, sep='\t', usecols=cols)
+        tempDf = pd.read_csv(infilepath, sep='\t', index_col=False)
+        print(f"tempDf=\n{tempDf}")
         self.df = tempDf[cols]
         self.df.reset_index()
         self.cols = cols
-        print("self.df=\n{}".format(self.df))
+        print(f"self.df=\n{self.df}")
         self.nXPoints = 10
         self.xpoints = [x for x in range(0, self.nXPoints)]
 
